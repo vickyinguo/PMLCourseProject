@@ -88,6 +88,6 @@ predicttesting
 ```
 
 ## Conclusion
-Random forest model fits the data better. The out of sample error is 99%.
+Random forest model fits the data better. The out of sample error is 1-99.22 = 0.78%.
 
 End
