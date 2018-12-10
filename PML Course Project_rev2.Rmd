@@ -28,7 +28,7 @@ dim(training)
 head(training)
 ```
 
-There are a lot of NA's and blanks in the data set. Remove the variables that has NA or blank in it, also the first 7 variables since they are not related to how the human acitivity is performed, put in trainingnew and testingnew respectively.
+There are a lot of NA's and blanks in the data set. Remove the variables that have NA or blank in it, also the first 7 variables since they are not related to how the human acitivity is performed, put in trainingnew and testingnew respectively.
 ```{r}
 trainingnew <- training[, colSums(is.na(training)) == 0]
 trainingnew <- trainingnew[, colSums(trainingnew != "") == nrow (trainingnew)]
