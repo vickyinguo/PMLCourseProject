@@ -8,7 +8,7 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement - a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, my goal is to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants and to predict the manner in which they did the exercise from the 5 correct and incorrect different ways they were asked to perform barbell lifts.
+Using devices such as Jawbone Up, Nike FuelBand, and Fitbit it is now possible to collect a large amount of data about personal activity relatively inexpensively. These type of devices are part of the quantified self movement – a group of enthusiasts who take measurements about themselves regularly to improve their health, to find patterns in their behavior, or because they are tech geeks. One thing that people regularly do is quantify how much of a particular activity they do, but they rarely quantify how well they do it. In this project, my goal is to use data from accelerometers on the belt, forearm, arm, and dumbell of 6 participants and to predict the manner in which they did the exercise from the 5 correct and incorrect different ways they were asked to perform barbell lifts.
 
 ## Data Preparation
 
@@ -24,7 +24,7 @@ dim(testing)
 dim(training)
 ```
 
-```{r echo=FALSE}
+```{r results='hide'}
 head(training)
 ```
 
@@ -45,7 +45,7 @@ dim(trainingnew)
 ```
 
 Partition training set into real training set for the machine learning models and cross validation set:
-```{r echo = FALSE}
+```{r results='hide'}
 set.seed(125)
 library(caret)
 inTrain <- createDataPartition(y=trainingnew$classe,p=0.7,list=FALSE)
@@ -55,13 +55,13 @@ cv <- trainingnew[-inTrain,]
 
 ## Train Models
 Train a multilevel logistic model to the realtrain data set:
-```{r cache = TRUE}
+```{r cache = TRUE, results='hide'}
 control <- trainControl(method = "cv", number = 5)
 fit <- train(classe ~ ., data = realtrain, method = "multinom", trControl = control)
 ```
 
 Test on cross validation set and calculate accuracy:
-```{r echo = FALSE}
+```{r results='hide'}
 predict <- predict(fit,cv)
 confusionMatrix(predict, cv$classe)
 ```
@@ -69,7 +69,7 @@ confusionMatrix(predict, cv$classe)
 Accuracy on cross validation set is only 66%. Not so good.
 
 Train a random forest model to the realtrain data set instead:
-```{r cache = TRUE}
+```{r cache = TRUE, results='hide'}
 fit2 <- train(classe ~ ., data = realtrain, method = "rf", trControl = control)
 ```
 
